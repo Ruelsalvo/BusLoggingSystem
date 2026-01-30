@@ -50,6 +50,7 @@ A QR code-based bus logging system built with Python, OpenCV, and Firebase, orig
 
 2. Data format in Firestore (bus_logs collection):
 
+```
 Field       : Example    : Type
 ---------------------------------
 BusLicense  : SAMPLE     : string
@@ -58,6 +59,7 @@ DataTime    : 10:21:54   : string
 Date        : 08/11/24   : string
 Status      : out        : string
 Time        : 10:19 AM   : string
+```
 
 3. Run app.py to open the web dashboard at [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
