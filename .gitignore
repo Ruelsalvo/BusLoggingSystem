@@ -1,0 +1,16 @@
+# Virtual environment
+.venv/
+
+# Generated QR codes
+qr_codes/
+qr_codes.zip
+
+# CSV logs
+*.csv
+
+# macOS system files
+.DS_Store
+
+# Firebase credentials
+*.json
+

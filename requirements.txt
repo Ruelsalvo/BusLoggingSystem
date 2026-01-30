@@ -1,0 +1,6 @@
+flask 
+firebase-admin 
+opencv-python 
+pandas 
+pyzbar 
+pillow

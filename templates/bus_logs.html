@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Logs</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: #e2e2e2 1px solid;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border: #e2e2e2 1px solid;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ededed;
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgb(247, 254, 255)
+        }
+
+        th {
+            background-color: #3f7fff;
+            color: white;
+        }
+
+        table tr:first-child th {
+            border-top: none;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #d2f7ff;
+        }
+
+        th {
+            background-color: #3f7fff;
+            color: white;
+        }
+
+        .in {
+            background-color: rgb(158, 255, 158);
+        }
+
+        .out {
+            background-color: rgb(255, 255, 170);
+        }
+
+        .late {
+            background-color: rgb(255, 170, 170);
+        }
+
+        button {
+            width: fit-content;
+            min-width: 100px;
+            height: 45px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 2.5px solid #E0E1E4;
+            box-shadow: 0px 0px 20px -20px;
+            cursor: pointer;
+            background-color: white;
+            transition: all 0.2s ease-in-out 0ms;
+            user-select: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:hover {
+            background-color: #F2F2F2;
+            box-shadow: 0px 0px 20px -18px;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        body {
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    <div class="container" style="margin-top: 3%;">
+        <h2>Bus Logging System</h2>
+    </div>
+    <br>
+
+    <label for="dateFilter">Filter by Date:</label>
+    <select id="dateFilter" onchange="filterEntries()" style="margin-bottom: 3%;">
+        <option value="all">All</option>
+        {% for date in dates %}
+        <option value="{{ date }}">{{ date }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="statusFilter">Filter by Status:</label>
+    <select id="statusFilter" onchange="filterEntries()" style="margin-bottom: 3%;">
+        <option value="all">All</option>
+        <option value="late">Late</option>
+        <option value="notLate">On Time</option>
+    </select>
+
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Time of Data Entry</th>
+            <th>Bus No</th>
+            <th>Bus License Plate</th>
+            <th>Time of Bus Entry</th>
+            <th>Status</th>
+        </tr>
+        {% for log in logs %}
+        <tr data-date="{{ log['Date'] }}" class="{{ 'late' if (datetime.datetime.strptime(log['Time'], "%I:%M %p").time() > datetime.datetime.strptime("7:45 AM", "%I:%M %p").time() and log['Status'] == 'in') or (datetime.datetime.strptime(log['Time'], "%I:%M %p").time() > datetime.datetime.strptime("3:20 PM", "%I:%M %p").time() and log['Status'] == 'out') else 'notLate' }}">
+            <td>{{ loop.index }}</td>
+            <td>{{ log['DataTime'] }}</td>
+            <td>{{ log['BusNo'] }}</td>
+            <td>{{ log['BusLicense'] }}</td>
+            <td>{{ log['Time'] }}</td>
+            <td class="{{ 'late' if (datetime.datetime.strptime(log['Time'], "%I:%M %p").time() > datetime.datetime.strptime("7:45 AM", "%I:%M %p").time() and log['Status'] == 'in') or (datetime.datetime.strptime(log['Time'], "%I:%M %p").time() > datetime.datetime.strptime("3:20 PM", "%I:%M %p").time() and log['Status'] == 'out') else log['Status'] }}">{{ 'Late ' + log['Status'] if (datetime.datetime.strptime(log['Time'], "%I:%M %p").time() > datetime.datetime.strptime("7:45 AM", "%I:%M %p").time() and log['Status'] == 'in') or (datetime.datetime.strptime(log['Time'], "%I:%M %p").time() > datetime.datetime.strptime("3:20 PM", "%I:%M %p").time() and log['Status'] == 'out') else log['Status'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <button onclick="exportTableToCSV()">Export All as CSV</button>
+    <button onclick="exportLateTableToCSV()">Export Late Entries as CSV</button>
+    <button onclick="exportNormalTableToCSV()">Export Normal Entries as CSV</button>
+
+    <script>
+        function filterEntries() {
+            const selectedDate = document.getElementById('dateFilter').value;
+            const selectedStatus = document.getElementById('statusFilter').value;
+            const rows = document.querySelectorAll('table tr[data-date]');
+
+            rows.forEach(row => {
+                const rowDate = row.getAttribute('data-date');
+                const rowStatus = row.classList.contains('late') ? 'late' : 'notLate';
+                
+                const dateMatch = (selectedDate === 'all' || rowDate === selectedDate);
+                const statusMatch = (selectedStatus === 'all' || rowStatus === selectedStatus);
+
+                row.style.display = (dateMatch && statusMatch) ? '' : 'none';
+            });
+        }
+        function exportTableToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            const rows = document.querySelectorAll("table tr");
+            const selectedDate = document.getElementById('dateFilter').value;
+            if (selectedDate !== "all") {
+                csvContent += "Date: " + selectedDate + "\n";
+            }
+            let headerRow = [];
+            rows[0].querySelectorAll("th").forEach(cell => {
+                headerRow.push(cell.textContent);
+            });
+            csvContent += headerRow.join(",") + "\n";
+            rows.forEach(row => {
+                if (row.style.display !== 'none') {
+                    let rowData = [];
+                    row.querySelectorAll("td").forEach(cell => {
+                        rowData.push(cell.textContent);
+                    });
+                    csvContent += rowData.join(",") + "\n";
+                }
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "bus_logs.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        function exportLateTableToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            const rows = document.querySelectorAll("table tr");
+            const selectedDate = document.getElementById('dateFilter').value;
+            if (selectedDate !== "all") {
+                csvContent += "Date: " + selectedDate + "\n";
+            }
+            let headerRow = [];
+            rows[0].querySelectorAll("th").forEach(cell => {
+                headerRow.push(cell.textContent);
+            });
+            csvContent += headerRow.join(",") + "\n";
+            rows.forEach(row => {
+                if (row.style.display !== 'none') {
+                    const statusCell = row.querySelector("td:last-child");
+                    if (statusCell && statusCell.classList.contains('late')) {
+                        let rowData = [];
+                        row.querySelectorAll("td").forEach(cell => {
+                            rowData.push(cell.textContent);
+                        });
+                        csvContent += rowData.join(",") + "\n";
+                    }
+                }
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "late_bus_logs.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function exportNormalTableToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            const rows = document.querySelectorAll("table tr");
+            const selectedDate = document.getElementById('dateFilter').value;
+
+            if (selectedDate !== "all") {
+                csvContent += "Date: " + selectedDate + "\n";
+            }
+
+            let headerRow = [];
+            rows[0].querySelectorAll("th").forEach(cell => {
+                headerRow.push(cell.textContent);
+            });
+            csvContent += headerRow.join(",") + "\n";
+    
+            rows.forEach(row => {
+                if (row.style.display !== 'none') {
+                    const statusCell = row.querySelector("td:last-child");
+                    if (statusCell && !statusCell.classList.contains('late')) {
+                        let rowData = [];
+                        row.querySelectorAll("td").forEach(cell => {
+                            rowData.push(cell.textContent);
+                        });
+                        csvContent += rowData.join(",") + "\n";
+                    }
+                }
+            });
+    
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "normal_bus_logs.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+
+</html>
