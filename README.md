@@ -109,7 +109,7 @@ python qrcode_generator/codeGen.py
 
 1. Clone the repo:
 ```
-git clone [https://github.com/JishnuSetia/BusLoggingSystem.git](https://github.com/JishnuSetia/BusLoggingSystem.git)   
+git clone https://github.com/JishnuSetia/BusLoggingSystem   
 cd BusLoggingSystem
 ```
 
