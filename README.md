@@ -71,10 +71,14 @@ Time        : 10:19 AM   : string
 ## QR Code Generation
 
 1. Place a buses.csv file in the qrcode_generator directory with this format:
-   BusNo,BusLicense,Status,BusType
+```
+BusNo,BusLicense,Status,BusType
+```
 
 2. Run the QR code generator:
-   python qrcode_generator/codeGen.py
+```   
+python qrcode_generator/codeGen.py
+```
 
 * This will generate QR codes for each bus.
 * The generated QR codes can then be scanned by main.py to log entries and exits.
@@ -104,15 +108,21 @@ Time        : 10:19 AM   : string
 ## Installation
 
 1. Clone the repo:
-   git clone [https://github.com/JishnuSetia/BusLoggingSystem.git](https://github.com/JishnuSetia/BusLoggingSystem.git)
-   cd BusLoggingSystem
+```
+git clone [https://github.com/JishnuSetia/BusLoggingSystem.git](https://github.com/JishnuSetia/BusLoggingSystem.git)   
+cd BusLoggingSystem
+```
 
 2. Create a virtual environment and activate it:
-   python3 -m venv .venv
-   source .venv/bin/activate
+```  
+python3 -m venv .venv  
+source .venv/bin/activate
+```
 
 3. Install dependencies:
-   pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 4. Add Firebase credentials JSON in the project root and update main.py / uploader.py.
 
