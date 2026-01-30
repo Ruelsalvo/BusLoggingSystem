@@ -92,7 +92,9 @@ Time        : 10:19 AM   : string
 ## Screenshots
 
 ![Bus Logging Dashboard](screenshots/IMG1.png)  
+
 ![QR Code Scan](screenshots/IMG2.png)  
+
 ![Log Export](screenshots/IMG3.png)
 
 ---
